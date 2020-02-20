@@ -8,9 +8,9 @@ The choice of using ENV has been done because of many reasons :
 
  * We mainly use it for services deployed into container orchestrator. For that case, ENV variables are the best way to configure services.
  * It is, by far, the choice that leads to the most simple implementation.
- * By the simplicity we reduce the bugs
- * By reducing the bugs, serenity to the developper we bring
- * Throught serenity, balance to the force we bring :godmode:
+ * By the simplicity we reduce bugs
+ * By reducing bugs, serenity to the developper we bring
+ * Through serenity, balance to the force we bring :godmode:
 
 There is no external dependencies. It is basically a simple wrapper around the standard `logger` [package](https://golang.org/pkg/log/) which define and configure five logger. `Debug`, `Info`, `Warn`, `Error` and `Critical`
 
