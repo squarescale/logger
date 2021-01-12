@@ -12,7 +12,7 @@ The choice of using ENV has been done because of many reasons :
  * By reducing bugs, serenity to the developper we bring
  * Through serenity, balance to the force we bring :godmode:
 
-There is no external dependencies. It is basically a simple wrapper around the standard `logger` [package](https://golang.org/pkg/log/) which define and configure five logger. `Debug`, `Info`, `Warn`, `Error` and `Critical`
+There is no external dependencies. It is basically a simple wrapper around the standard `logger` [package](https://golang.org/pkg/log/) which define and configure six logger. `Trace`, `Debug`, `Info`, `Warn`, `Error` and `Critical`
 
 ## how it works
 
@@ -23,9 +23,9 @@ import "github.com/squarescale/logger"
 
 ```
 
-Then you may access the five defined [loggers](https://golang.org/pkg/log/#Logger): `Debug`, `Info`, `Warn`, `Error` and `Critical`.
+Then you may access the six defined [loggers](https://golang.org/pkg/log/#Logger): `Trace`, `Debug`, `Info`, `Warn`, `Error` and `Critical`.
 
-You may change your log level using `$LEVEL`. Five case are considered: empty, `debug`, `info`, `warn` and `error`. When empty, the default level is `info` and `Critical` is alway enabled.
+You may change your log level using `$LEVEL`. Six case are considered: empty, `trace`, `debug`, `info`, `warn` and `error`. When empty, the default level is `info` and `Critical` is alway enabled.
 
 If non empty, `$SERVICE_NAME` will be used in the logs prefix.
 

@@ -9,15 +9,23 @@ import (
 )
 
 // logger definition. Their behavior is defined by two env variable. $SERVICE_NAME, which can be used to customize
-// the output and $LOG_LEVEL which may have five value : empty "debug", "info", "warn" and "error".
+// the output and $LOG_LEVEL which may have six value : empty "trace", "debug", "info", "warn" and "error".
 // If $LOG_LEVEL is not set, the default value will be "info". The critical level may not be disabled.
 var (
+	Trace    *log.Logger = log.New(traceWriter(), fmt.Sprintf("%s - TRACE : ", os.Getenv("SERVICE_NAME")), log.Ldate|log.Ltime|log.Lshortfile)
 	Debug    *log.Logger = log.New(debugWriter(), fmt.Sprintf("%s - DEBUG : ", os.Getenv("SERVICE_NAME")), log.Ldate|log.Ltime|log.Lshortfile)
 	Info     *log.Logger = log.New(infoWriter(), fmt.Sprintf("%s - INFO : ", os.Getenv("SERVICE_NAME")), log.Ldate|log.Ltime|log.Lshortfile)
 	Warn     *log.Logger = log.New(warnWriter(), fmt.Sprintf("%s - WARN : ", os.Getenv("SERVICE_NAME")), log.Ldate|log.Ltime|log.Lshortfile)
 	Error    *log.Logger = log.New(errorWriter(), fmt.Sprintf("%s - ERROR : ", os.Getenv("SERVICE_NAME")), log.Ldate|log.Ltime|log.Llongfile)
 	Critical *log.Logger = log.New(os.Stderr, fmt.Sprintf("%s - CRITICAL : ", os.Getenv("SERVICE_NAME")), log.Ldate|log.Ltime|log.Llongfile)
 )
+
+func traceWriter() io.Writer {
+	if traceEnable() {
+		return os.Stdout
+	}
+	return ioutil.Discard
+}
 
 func debugWriter() io.Writer {
 	if debugEnable() {
@@ -45,6 +53,10 @@ func errorWriter() io.Writer {
 		return os.Stdout
 	}
 	return ioutil.Discard
+}
+
+func traceEnable() bool {
+	return os.Getenv("LOG_LEVEL") == "trace"
 }
 
 func debugEnable() bool {
